@@ -16,3 +16,18 @@ class picapau(py.sprite.Sprite):
         self.image = py.transform.scale(self.image,(self.widht,self.height))
         self.rect = self.image.get_rect()
         self.mask= py.mask.from_surface(self.image)
+    
+    def update (self):
+        self.movement()
+        self.rect.center = (self.x, self.y)
+
+
+    def movement (self):
+        self.y += self.vel
+        if self.y - self.height / 2 < 0:
+            self.y = self.height / 2
+            self.vel *= -1
+        
+        elif self.y + self.height / 2 > HEIGHT:
+            self.y = HEIGHT - self.height / 2
+            self.vel *= -1
