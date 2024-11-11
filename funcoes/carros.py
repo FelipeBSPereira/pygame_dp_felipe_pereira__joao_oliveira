@@ -45,3 +45,8 @@ class carros(py.sprite.Sprite):
 
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
+    def Checaimpacto(self):
+        mbpC=py.sprite.spritecollide(self, group_mbp, False, py.sprite.collide_mask)
+        if mbpC:
+            somExp.play()
+            explosao.explode(self.x, self.y)
