@@ -25,11 +25,23 @@ class carros(py.sprite.Sprite):
         keys = py.key.get_pressed()
         if keys [py.K_LEFT]:
             self.x -= self.vel
-            self.image = self.capy2
+            self.image = self.carro2
         elif keys [py.K_RIGHT]:
             self.x += self.vel
-            self.image = self.capy1
+            self.image = self.carro1
         if keys [py.K_UP]:
             self.y -= self.vel
         elif keys [py.K_DOWN]:
             self.y += self.vel
+    def correction (self):
+        if self.x - self.widht / 2 < 0 :
+            self.x = self.widht / 2
+
+        elif self.x + self.widht / 2 > WIDTH:
+            self.x = WIDTH - self.widht / 2
+
+        if self.y - self.height / 2 < 0 :
+            self.y = self.height / 2
+
+        elif self.y + self.height / 2 > HEIGHT:
+            self.y = HEIGHT - self.height / 2
