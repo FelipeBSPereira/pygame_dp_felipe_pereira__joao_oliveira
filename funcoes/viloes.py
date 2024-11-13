@@ -1,4 +1,4 @@
-class carros(py.sprite.Sprite):
+class viloes(py.sprite.Sprite):
     def __init__ (self,numero):
         super().__init__()
         if numero == 1:
