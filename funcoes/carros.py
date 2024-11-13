@@ -1,52 +1,33 @@
 class carros(py.sprite.Sprite):
-    def __init__(self):
+    def __init__ (self,numero):
         super().__init__()
-        self.x = 50
-        self.y = HEIGHT/2
-        self.vel = 4
+        if numero == 1:
+            self.x = 380
+            self.image = py.image.load ('carro.png')
+            self.vel = -4
+        else:
+            self.x = 920
+            self.image = py.image.load ('carro.png')
+            self.vel = 5
+        
+        self.y = HEIGHT / 2
         self.widht = 100
-        self.height = 50
-
-        self.carro1 = py.image.load ('carro_para_direita.png')
-        self.carro2 = py.image.load ('carro_para_esquerda.png')
-        self.carro1 = py.transform.scale(self.carro1,(self.widht,self.height))
-        self.carro2 = py.transform.scale(self.carro2,(self.widht,self.height))
-        self.image = self.carro1
+        self.height = 150
+        self.image = py.transform.scale(self.image,(self.widht,self.height))
         self.rect = self.image.get_rect()
         self.mask= py.mask.from_surface(self.image)
-
+    
     def update (self):
         self.movement()
-        self.correction()
-        self.Checaimpacto()
-        self.rect.center = (self.x,self.y)
-    
+        self.rect.center = (self.x, self.y)
+
+
     def movement (self):
-        keys = py.key.get_pressed()
-        if keys [py.K_LEFT]:
-            self.x -= self.vel
-            self.image = self.carro2
-        elif keys [py.K_RIGHT]:
-            self.x += self.vel
-            self.image = self.carro1
-        if keys [py.K_UP]:
-            self.y -= self.vel
-        elif keys [py.K_DOWN]:
-            self.y += self.vel
-    def correction (self):
-        if self.x - self.widht / 2 < 0 :
-            self.x = self.widht / 2
-
-        elif self.x + self.widht / 2 > WIDTH:
-            self.x = WIDTH - self.widht / 2
-
-        if self.y - self.height / 2 < 0 :
+        self.y += self.vel
+        if self.y - self.height / 2 < 0:
             self.y = self.height / 2
-
+            self.vel *= -1
+        
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
-    def Checaimpacto(self):
-        mbpC=py.sprite.spritecollide(self, group_mbp, False, py.sprite.collide_mask)
-        if mbpC:
-            somExp.play()
-            explosao.explode(self.x, self.y)
+            self.vel *= -1
