@@ -13,5 +13,5 @@ class Tela(py.sprite.Sprite):
         self.y = 0
         self.rect = self.image.get_rect()
 
-        def update (self):
+        def arruma (self):
             self.rect.topleft = (self.x,self.y)
