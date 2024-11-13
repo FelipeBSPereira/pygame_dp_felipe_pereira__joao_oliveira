@@ -1,3 +1,5 @@
+import pygame as py
+import time
 class picapau(py.sprite.Sprite):
     def __init__(self):
         super().__init__()
