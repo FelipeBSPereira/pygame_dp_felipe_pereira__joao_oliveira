@@ -7,8 +7,8 @@ class picapau(py.sprite.Sprite):
         self.widht = 100
         self.height = 50
 
-        self.picapau1 = py.image.load('picapau_para_direita.png')
-        self.picapau2 = py.image.load('picapau_para_esquerda.png')
+        self.picapau1 = py.image.load('picapau_direita.png')
+        self.picapau2 = py.image.load('picapau_esquerda.png')
         self.picapau1 = py.transform.scale(self.picapau1,(self.widht,self.height))
         self.picapau2 = py.transform.scale(self.picapau2,(self.widht,self.height))
         self.image = self.picapau1
