@@ -97,13 +97,13 @@ class Torta(py.sprite.Sprite):
         self.retangulo = self.imagem.get_rect()
         self.mascara = py.mask.from_surface(self.imagem)
     
-    def atualizar(self, grupo_personagens, pontos):
+    def atualizar(self, picapau, pontos):
         if self.visivel:
-            self.verificar_colisao(grupo_personagens, pontos)
+            self.verificar_colisao(picapau, pontos)
             self.retangulo.center = (self.posicao_x, self.posicao_y)
 
-    def verificar_colisao(self, grupo_personagens, pontos):
-        colisao_detectada = py.sprite.spritecollide(self, grupo_personagens, False, py.sprite.collide_mask)
+    def verificar_colisao(self, picapau, pontos):
+        colisao_detectada = py.sprite.spritecollide(self, picapau, False, py.sprite.collide_mask)
         if colisao_detectada:
             self.visivel = False
             somB.play()
@@ -113,7 +113,7 @@ class Torta(py.sprite.Sprite):
                 if pontos < 5:
                     aumentar_nivel()
                 else:
-                    grupo_personagens.empty()
+                    picapau.empty()
                     resetar_jogo()
                     exibir_tela_final(1)
             else:
