@@ -96,14 +96,16 @@ class Torta(py.sprite.Sprite):
     def __init__(self, quantidade):
         super().__init__()
         self.quantidade = quantidade
-        self.imagem = py.image.load('assets/torta.png')
+        self.image = py.image.load('assets/torta.png')
+        self.image = py.transform.scale(self.image,(30,40))
         self.visivel = quantidade != 1
         self.posicao_x = 1200 if quantidade != 1 else 200
         self.posicao_y = HEIGHT / 2
         
-        self.imagem = py.transform.scale2x(self.imagem)
-        self.retangulo = self.imagem.get_rect()
-        self.mascara = py.mask.from_surface(self.imagem)
+        # self.image = py.transform.scale2x(self.image)
+        self.retangulo = self.image.get_rect()
+        self.mascara = py.mask.from_surface(self.image)
+        self.rect = self.mascara.get_rect()
     
     def atualizar(self, picapau, pontos):
         if self.visivel:
@@ -127,15 +129,16 @@ class Torta(py.sprite.Sprite):
                 torta2.visivel = True
 
 class Tela(py.sprite.Sprite):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.t_jogo = py.image.load ('assets/fundo_teste.png')
-        #self.t_final = py.image.load ('tela_final.png')
+        self.t_final = py.image.load ('assets/fundo_teste.png')
 
         self.t_jogo = py.transform.scale (self.t_jogo,(WIDTH,HEIGHT))
         self.t_final = py.transform.scale (self.t_final,(WIDTH,HEIGHT))
 
         self.image = self.t_jogo
+        print(self.image)
         self.x = 0
         self.y = 0
         self.rect = self.image.get_rect()
@@ -178,32 +181,34 @@ def reinicia_jogo():
     for viloes in grupo_viloes:
         viloes.y = HEIGHT / 2
         viloes.vel = 4  
-def main():
-    global pontos, jogo
-    pontos_alvo = 5 
-    while True:
-        clock.tick(60)
-        for event in py.event.get():
-            if event.type == py.QUIT:
-                py.quit()
-                exit()
 
-        if jogo:
-            window.fill((255, 255, 255)) 
-            grupo_picapau.update()
-            grupo_viloes.update()
-            grupo_picapau.draw(window)
-            grupo_viloes.draw(window)
-            pontos_texto = pontos_font.render("Pontuação: " + str(pontos), True, (0, 0, 0))
-            nivel_texto = pontos_font.render("Nível: " + str(nivel), True, (0, 0, 0))
-            window.blit(pontos_texto, (10, 10))
-            window.blit(nivel_texto, (10, 60))
-            py.display.update()
-            pontos += 1
-            if pontos >= pontos_alvo * nivel:
-                sobenivel()
-        else:
-            tela_fim()
+# def main():
+#     global pontos, jogo
+#     pontos_alvo = 5 
+#     while True:
+#         clock.tick(60)
+#         for event in py.event.get():
+#             if event.type == py.QUIT:
+#                 py.quit()
+#                 exit()
+
+#         if jogo:
+#             window.fill((255, 255, 255)) 
+#             grupo_picapau.update()
+#             grupo_viloes.update()
+#             grupo_picapau.draw(window)
+#             grupo_viloes.draw(window)
+#             pontos_texto = pontos_font.render("Pontuação: " + str(pontos), True, (0, 0, 0))
+#             nivel_texto = pontos_font.render("Nível: " + str(nivel), True, (0, 0, 0))
+#             window.blit(pontos_texto, (10, 10))
+#             window.blit(nivel_texto, (10, 60))
+#             py.display.update()
+#             pontos += 1
+#             if pontos >= pontos_alvo * nivel:
+#                 sobenivel()
+#         else:
+#             tela_fim()
+
 picapau1 = picapau()
 grupo_picapau = py.sprite.Group(picapau1)
 zeca_urubu = viloes(1)
@@ -211,60 +216,60 @@ leoncio = viloes(2)
 grupo_viloes = py.sprite.Group(zeca_urubu, leoncio)
 
 
-py.init()
+# py.init()
 
-window= py.display.set_mode((WIDTH,HEIGHT))
-py.display.set_caption ('Crossy Pica-pau')
-clock = py.time.Clock ()
+# window= py.display.set_mode((WIDTH,HEIGHT))
+# py.display.set_caption ('Crossy Pica-pau')
+# clock = py.time.Clock ()
 
-pontos = 0
-pontos_font = py.font.SysFont ('comicsans', 44 , True)
+# pontos = 0
+# pontos_font = py.font.SysFont ('comicsans', 44 , True)
 
-fundo = Tela ()
-screen_group = py.sprite.Group()
-screen_group.add(fundo)
+# fundo = Tela ()
+# screen_group = py.sprite.Group()
+# screen_group.add(fundo)
 
-picapau =picapau()
-grupo_picapau = py.sprite.Group()
-grupo_picapau.add(picapau)
+# picapau =picapau()
+# grupo_picapau = py.sprite.Group()
+# grupo_picapau.add(picapau)
 
-zeca_urubu = viloes(1)
-leoncio = viloes(2)
-grupo_picapau = py.sprite.Group()
-grupo_viloes.add(leoncio,zeca_urubu)
+# zeca_urubu = viloes(1)
+# leoncio = viloes(2)
+# grupo_picapau = py.sprite.Group()
+# grupo_viloes.add(leoncio,zeca_urubu)
 
-torta1= Torta(1)
-torta2= Torta(2)
-grupo_torta=py.sprite.Group()
-grupo_torta.add(torta1,torta2)
-tortas= [torta1,torta2]
+# torta1= Torta(1)
+# torta2= Torta(2)
+# grupo_torta=py.sprite.Group()
+# grupo_torta.add(torta1,torta2)
+# tortas= [torta1,torta2]
 
-#somJG= py.mixer.Sound("música_jogo")
-#somD= py.mixer.Sound("perdeu")
-#somR= py.mixer.Sound("risada")
+# #somJG= py.mixer.Sound("música_jogo")
+# #somD= py.mixer.Sound("perdeu")
+# #somR= py.mixer.Sound("risada")
 
 
-#captura= capture() 
-jogo=True
-game = True
+# #captura= capture() 
+# jogo=True
+# game = True
 
-while game :
+# while game :
     
-    clock.tick(60)
-    for event in py.event.get():
-        if event.type == py.QUIT:
-            game = False
+#     clock.tick(60)
+#     for event in py.event.get():
+#         if event.type == py.QUIT:
+#             game = False
 
-    screen_group.draw(window)
+#     screen_group.draw(window)
 
-    grupo_viloes.draw(window)
-    grupo_picapau.draw(window)
-    grupo_torta.draw(window)
-    grupo_viloes.update()
-    grupo_picapau.update()
-    grupo_torta.update()
-    screen_group.update()
+#     grupo_viloes.draw(window)
+#     grupo_picapau.draw(window)
+#     grupo_torta.draw(window)
+#     grupo_viloes.update()
+#     grupo_picapau.update()
+#     grupo_torta.update()
+#     screen_group.update()
     
 
-    py.display.update()
-py.quit()
+#     py.display.update()
+# py.quit()

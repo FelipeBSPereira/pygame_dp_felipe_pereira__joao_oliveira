@@ -1,27 +1,27 @@
 import pygame as py
 import time
 from funcoes import *
-py.init()
-while game :
+# py.init()
+# while game :
     
-    clock.tick(60)
-    for event in py.event.get():
-        if event.type == py.QUIT:
-            game = False
+#     clock.tick(60)
+#     for event in py.event.get():
+#         if event.type == py.QUIT:
+#             game = False
 
-    screen_group.draw(window)
+#     screen_group.draw(window)
 
-    grupo_viloes.draw(window)
-    grupo_picapau.draw(window)
-    grupo_torta.draw(window)
-    grupo_viloes.update()
-    grupo_picapau.update()
-    grupo_torta.update()
-    screen_group.update()
+#     grupo_viloes.draw(window)
+#     grupo_picapau.draw(window)
+#     grupo_torta.draw(window)
+#     grupo_viloes.update()
+#     grupo_picapau.update()
+#     grupo_torta.update()
+#     screen_group.update()
     
 
-    py.display.update()
-py.quit()
+#     py.display.update()
+# py.quit()
 
 
 
@@ -37,7 +37,7 @@ clock = py.time.Clock ()
 pontos = 0
 pontos_font = py.font.SysFont ('comicsans', 44 , True)
 
-fundo = Tela ()
+fundo = Tela()
 screen_group = py.sprite.Group()
 screen_group.add(fundo)
 
@@ -47,7 +47,7 @@ grupo_picapau.add(picapau)
 
 zeca_urubu = viloes(1)
 leoncio = viloes(2)
-grupo_picapau = py.sprite.Group()
+grupo_viloes = py.sprite.Group()
 grupo_viloes.add(leoncio,zeca_urubu)
 
 torta1= Torta(1)
