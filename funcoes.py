@@ -1,6 +1,6 @@
 import pygame as py
 import time
-
+from assets import *
 from sympy import capture
 
 WIDTH = 1400
@@ -17,8 +17,8 @@ class picapau(py.sprite.Sprite):
         self.widht = 100
         self.height = 50
 
-        self.picapau1 = py.image.load('picapau_direita.png')
-        self.picapau2 = py.image.load('picapau_esquerda.png')
+        self.picapau1 = py.image.load('assets/picapau_direita.png')
+        self.picapau2 = py.image.load('assets/picapau_esquerda.png')
         self.picapau1 = py.transform.scale(self.picapau1,(self.widht,self.height))
         self.picapau2 = py.transform.scale(self.picapau2,(self.widht,self.height))
         self.image = self.picapau1
@@ -63,11 +63,11 @@ class viloes(py.sprite.Sprite):
         super().__init__()
         if numero == 1:
             self.x = 380
-            self.image = py.image.load ('carro.png')
+            self.image = py.image.load ('assets/leoncio.png')
             self.vel = -4
         else:
             self.x = 920
-            self.image = py.image.load ('carro.png')
+            self.image = py.image.load ('assets/zecaurubu.png')
             self.vel = 5
         
         self.y = HEIGHT / 2
@@ -96,7 +96,7 @@ class Torta(py.sprite.Sprite):
     def __init__(self, quantidade):
         super().__init__()
         self.quantidade = quantidade
-        self.imagem = py.image.load('imagem_torta.png')
+        self.imagem = py.image.load('assets/torta.png')
         self.visivel = quantidade != 1
         self.posicao_x = 1200 if quantidade != 1 else 200
         self.posicao_y = HEIGHT / 2
@@ -124,7 +124,7 @@ class Torta(py.sprite.Sprite):
                     reinicia_jogo()
                     tela_fim(1)
             else:
-                torta1.visivel = True
+                torta2.visivel = True
 
 class Tela(py.sprite.Sprite):
     def _init_(self):
@@ -204,9 +204,8 @@ def main():
                 sobenivel()
         else:
             tela_fim()
-picapau1 = picapau(1)
-picapau2 = picapau(2)
-grupo_picapau = py.sprite.Group(picapau)
+picapau1 = picapau()
+grupo_picapau = py.sprite.Group(picapau1)
 zeca_urubu = viloes(1)
 leoncio = viloes(2)
 grupo_viloes = py.sprite.Group(zeca_urubu, leoncio)
@@ -240,12 +239,12 @@ grupo_torta=py.sprite.Group()
 grupo_torta.add(torta1,torta2)
 tortas= [torta1,torta2]
 
-somJG= py.mixer.Sound("música_jogo")
-somD= py.mixer.Sound("perdeu")
-somR= py.mixer.Sound("risada")
+#somJG= py.mixer.Sound("música_jogo")
+#somD= py.mixer.Sound("perdeu")
+#somR= py.mixer.Sound("risada")
 
 
-captura= capture() 
+#captura= capture() 
 jogo=True
 game = True
 
