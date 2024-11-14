@@ -1,30 +1,5 @@
 import pygame as py
 import time
-from funcoes import Tela, Picapau, Viloes, Torta, tela_fim, sobenivel, reinicia_jogo
-pygame.init()
-while game :
-    
-    clock.tick(60)
-    for event in py.event.get():
-        if event.type == py.QUIT:
-            game = False
-
-    screen_group.draw(window)
-
-    grupo_viloes.draw(window)
-    grupo_picapau.draw(window)
-    grupo_torta.draw(window)
-    grupo_viloes.update()
-    grupo_picapau.update()
-    grupo_torta.update()
-    screen_group.update()
-    
-
-    py.display.update()
-py.quit()
-
-
-
 WIDTH = 1400
 HEIGHT = 800
 
@@ -85,5 +60,3 @@ while game :
 
     py.display.update()
 py.quit()
-
-

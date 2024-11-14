@@ -1,5 +1,6 @@
 import pygame as py
 import time
+import parametros2
 class picapau(py.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -186,7 +187,7 @@ def main():
             grupo_picapau.update()
             grupo_viloes.update()
             grupo_picapau.draw(window)
-            grupo_viloes group_mbp.draw(window)
+            grupo_viloes.draw(window)
             pontos_texto = pontos_font.render("Pontuação: " + str(pontos), True, (0, 0, 0))
             nivel_texto = pontos_font.render("Nível: " + str(nivel), True, (0, 0, 0))
             window.blit(pontos_texto, (10, 10))
@@ -197,7 +198,7 @@ def main():
                 sobenivel()
         else:
             tela_fim()
-picapau = Picapau()
+picapau = picapau()
 grupo_picapau = py.sprite.Group(picapau)
 zeca_urubu = viloes(1)
 leoncio = viloes(2)
