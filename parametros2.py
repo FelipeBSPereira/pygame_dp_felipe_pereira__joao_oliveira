@@ -1,5 +1,6 @@
 import pygame as py
 import time
+
 WIDTH = 1400
 HEIGHT = 800
 
@@ -25,7 +26,7 @@ leoncio = viloes(2)
 grupo_picapau = py.sprite.Group()
 grupo_viloes.add(carro_1,carro_2)
 
-torta1= torta(1)
+torta1= Torta(1)
 torta2= torta(2)
 grupo_torta=py.sprite.Group()
 grupo_torta.add(torta1,torta2)

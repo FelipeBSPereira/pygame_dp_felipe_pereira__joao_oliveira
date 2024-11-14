@@ -1,7 +1,7 @@
 import pygame as py
 import time
-from funcoes import Tela, Picapau, Viloes, Torta, tela_fim, sobenivel, reinicia_jogo
-pygame.init()
+from funcoes import *
+py.init()
 while game :
     
     clock.tick(60)
@@ -48,10 +48,10 @@ grupo_picapau.add(picapau)
 zeca_urubu = viloes(1)
 leoncio = viloes(2)
 grupo_picapau = py.sprite.Group()
-grupo_viloes.add(carro_1,carro_2)
+grupo_viloes.add(leoncio,zeca_urubu)
 
-torta1= torta(1)
-torta2= torta(2)
+torta1= Torta(1)
+torta2= Torta(2)
 grupo_torta=py.sprite.Group()
 grupo_torta.add(torta1,torta2)
 tortas= [torta1,torta2]
