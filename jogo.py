@@ -56,12 +56,12 @@ grupo_torta=py.sprite.Group()
 grupo_torta.add(torta1,torta2)
 tortas= [torta1,torta2]
 
-somJG= py.mixer.Sound("música_jogo")
-somD= py.mixer.Sound("perdeu")
-somR= py.mixer.Sound("risada")
+#somJG= py.mixer.Sound("música_jogo")
+#somD= py.mixer.Sound("perdeu")
+#somR= py.mixer.Sound("risada")
 
 
-captura= captura()
+#captura= captura()
 jogo=True
 game = True
 
