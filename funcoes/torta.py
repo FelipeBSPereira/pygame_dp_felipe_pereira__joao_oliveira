@@ -17,7 +17,7 @@ class Torta(py.sprite.Sprite):
             self.retangulo.center = (self.posicao_x, self.posicao_y)
 
     def verificar_colisao(self, grupo_personagens, pontos):
-        colisao_detectada = py.sprite.spritecollide(self, grupo_personagens, False, py.sprite.collide_mask)
+        colisao_detectada = py.sprite.spritecollide(self, grupo_picapau, False, py.sprite.collide_mask)
         if colisao_detectada:
             self.visivel = False
             somB.play()
