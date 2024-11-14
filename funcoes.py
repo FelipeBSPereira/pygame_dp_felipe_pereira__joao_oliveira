@@ -1,6 +1,8 @@
 import pygame as py
 import time
 
+from sympy import capture
+
 WIDTH = 1400
 HEIGHT = 800
 
@@ -54,7 +56,7 @@ class picapau(py.sprite.Sprite):
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
     def Checaimpacto(self):
-        colisao_viloes=py.sprite.spritecollide(self, group_viloes, False, py.sprite.collide_mask)
+        colisao_viloes=py.sprite.spritecollide(self, grupo_viloes, False, py.sprite.collide_mask)
         
 class viloes(py.sprite.Sprite):
     def __init__ (self,numero):
@@ -112,18 +114,17 @@ class Torta(py.sprite.Sprite):
         colisao_detectada = py.sprite.spritecollide(self, grupo_picapau, False, py.sprite.collide_mask)
         if colisao_detectada:
             self.visivel = False
-            somB.play()
             
             if self.quantidade == 1:
-                torta_b.visivel = True
+                torta1.visivel = True
                 if pontos < 5:
-                    aumentar_nivel()
+                    sobenivel()
                 else:
                     picapau.empty()
-                    resetar_jogo()
-                    exibir_tela_final(1)
+                    reinicia_jogo()
+                    tela_fim(1)
             else:
-                torta_a.visivel = True
+                torta1.visivel = True
 
 class Tela(py.sprite.Sprite):
     def _init_(self):
@@ -203,7 +204,8 @@ def main():
                 sobenivel()
         else:
             tela_fim()
-picapau = picapau()
+picapau1 = picapau(1)
+picapau2 = picapau(2)
 grupo_picapau = py.sprite.Group(picapau)
 zeca_urubu = viloes(1)
 leoncio = viloes(2)
@@ -230,10 +232,10 @@ grupo_picapau.add(picapau)
 zeca_urubu = viloes(1)
 leoncio = viloes(2)
 grupo_picapau = py.sprite.Group()
-grupo_viloes.add(carro_1,carro_2)
+grupo_viloes.add(leoncio,zeca_urubu)
 
 torta1= Torta(1)
-torta2= torta(2)
+torta2= Torta(2)
 grupo_torta=py.sprite.Group()
 grupo_torta.add(torta1,torta2)
 tortas= [torta1,torta2]
@@ -243,7 +245,7 @@ somD= py.mixer.Sound("perdeu")
 somR= py.mixer.Sound("risada")
 
 
-captura= captura()
+captura= capture() 
 jogo=True
 game = True
 
