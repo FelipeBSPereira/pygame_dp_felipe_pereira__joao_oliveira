@@ -48,7 +48,7 @@ class picapau(py.sprite.Sprite):
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
     def Checaimpacto(self):
-        picapauC=py.sprite.spritecollide(self, group_mbp, False, py.sprite.collide_mask)
+        colisao_viloes=py.sprite.spritecollide(self, group_viloes, False, py.sprite.collide_mask)
 
 class viloes(py.sprite.Sprite):
     def __init__ (self,numero):
@@ -135,3 +135,70 @@ class Tela(py.sprite.Sprite):
 
         def arruma (self):
             self.rect.topleft = (self.x,self.y)
+
+def sobenivel():
+    global nivel, pontos
+    nivel += 1
+    for viloes in  grupo_viloes:
+        if viloes.vel < 0:
+            viloes.vel -= 1
+        else:
+            viloes.vel += 1
+def tela_fim():
+    global pontos, recorde, jogo
+    texto_final= pontos_font.render("Pontuação: " + str(pontos), True, (255, 0, 0))
+    texto_recorde = pontos_font.render("Recorde: " + str(recorde), True, (0, 255, 0))
+    texto_reiniciar = pontos_font.render("Pressione R para reiniciar", True, (255, 255, 255))
+    window.fill((0, 0, 0))
+    window.blit(texto_final, (WIDTH / 2 - texto_final.get_width() / 2, HEIGHT / 2 - 50))
+    window.blit(texto_recorde, (WIDTH / 2 - texto_recorde.get_width() / 2, HEIGHT / 2))
+    window.blit(texto_reiniciar, (WIDTH / 2 - texto_reiniciar.get_width() / 2, HEIGHT / 2 + 50))
+    py.display.flip()
+    while not jogo:
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                py.quit()
+                exit()
+            if event.type == py.KEYDOWN and event.key == py.K_r:
+                reinicia_jogo()
+def reinicia_jogo():
+    global pontos, nivel, jogo
+    pontos = 0
+    nivel = 1
+    jogo = True
+    capy.x = 50
+    capy.y = HEIGHT / 2
+    for viloes in group_mbp:
+        viloes.y = HEIGHT / 2
+        viloes.vel = 4  
+def main():
+    global pontos, jogo
+    pontos_alvo = 5 
+    while True:
+        clock.tick(60)
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                py.quit()
+                exit()
+
+        if jogo:
+            window.fill((255, 255, 255)) 
+            grupo_picapau.update()
+            grupo_viloes.update()
+            grupo_picapau.draw(window)
+            grupo_viloes group_mbp.draw(window)
+            pontos_texto = pontos_font.render("Pontuação: " + str(pontos), True, (0, 0, 0))
+            nivel_texto = pontos_font.render("Nível: " + str(nivel), True, (0, 0, 0))
+            window.blit(pontos_texto, (10, 10))
+            window.blit(nivel_texto, (10, 60))
+            py.display.update()
+            pontos += 1
+            if pontos >= pontos_alvo * nivel:
+                sobenivel()
+        else:
+            tela_fim()
+picapau = Picapau()
+grupo_picapau = py.sprite.Group(picapau)
+zeca_urubu = viloes(1)
+leoncio = viloes(2)
+grupo_viloes = py.sprite.Group(zeca_urubu, leoncio)
