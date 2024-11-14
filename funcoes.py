@@ -48,7 +48,7 @@ class picapau(py.sprite.Sprite):
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
     def Checaimpacto(self):
-        picapauC=py.sprite.spritecollide(self, group_mbp, False, py.sprite.collide_mask)
+        picapauC=py.sprite.spritecollide(self, grupo_viloes, False, py.sprite.collide_mask)
 
 class viloes(py.sprite.Sprite):
     def __init__ (self,numero):
@@ -99,11 +99,11 @@ class Torta(py.sprite.Sprite):
     
     def atualizar(self, picapau, pontos):
         if self.visivel:
-            self.verificar_colisao(picapau, pontos)
+            self.verificar_colisao(grupo_picapau, pontos)
             self.retangulo.center = (self.posicao_x, self.posicao_y)
 
     def verificar_colisao(self, picapau, pontos):
-        colisao_detectada = py.sprite.spritecollide(self, picapau, False, py.sprite.collide_mask)
+        colisao_detectada = py.sprite.spritecollide(self, grupo_picapau, False, py.sprite.collide_mask)
         if colisao_detectada:
             self.visivel = False
             somB.play()

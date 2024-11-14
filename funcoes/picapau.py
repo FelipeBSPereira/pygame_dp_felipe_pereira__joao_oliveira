@@ -46,4 +46,4 @@ class picapau(py.sprite.Sprite):
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
     def Checaimpacto(self):
-        picapauC=py.sprite.spritecollide(self, group_mbp, False, py.sprite.collide_mask)
+        picapauC=py.sprite.spritecollide(self, grupo_viloes, False, py.sprite.collide_mask)
