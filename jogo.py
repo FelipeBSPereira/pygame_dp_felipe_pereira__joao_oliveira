@@ -26,7 +26,7 @@ from funcoes import *
 
 
 WIDTH = 1400
-HEIGHT = 800
+HEIGHT = 700
 
 py.init()
 
@@ -77,6 +77,8 @@ while game :
     grupo_viloes.draw(window)
     grupo_picapau.draw(window)
     grupo_torta.draw(window)
+
+
     grupo_viloes.update()
     grupo_picapau.update()
     grupo_torta.update()
