@@ -165,3 +165,28 @@ class Tela(py.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 
+def tela_final():
+    window.fill((0, 0, 0))
+    final_texto = final_font.render("Game Over!", True, (255, 0, 0))
+    reinicia_texto = pontos_font.render("Pressione qualquer tecla para reiniciar", True, (255, 255, 255))
+    window.blit(final_texto, (WIDTH // 2 - final_texto.get_width() // 2, HEIGHT // 3))
+    window.blit(reinicia_texto, (WIDTH // 2 - reinicia_texto.get_width() // 2, HEIGHT // 2))
+    py.display.update()
+
+    esperando = True
+    while esperando:
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                py.quit()
+                exit()
+            if event.type == py.KEYDOWN:
+                esperando = False
+
+def reinicia_jogo():
+    global pontos, jogo
+    pontos = 0
+    jogo = True
+    picapau1.reset()
+    torta1.reset()
+    for vilao in grupo_viloes:
+        vilao.reset()
