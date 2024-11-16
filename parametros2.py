@@ -15,7 +15,6 @@ pontos_font = py.font.SysFont('comicsans', 44, True)
 final_font = py.font.SysFont('comicsans', 64, True)
 
 pontos = 0
-nivel = 1
 recorde = 0
 jogo = True
 
