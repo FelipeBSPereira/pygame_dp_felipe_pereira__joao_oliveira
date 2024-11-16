@@ -1,62 +1,65 @@
 import pygame as py
-import time
-from assets import *
-from sympy import capture
+from parametros2 import *
 
-WIDTH = 1400
-HEIGHT = 800
-
-
-
-class picapau(py.sprite.Sprite):
+class Picapau(py.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.x = 50
-        self.y = HEIGHT/2
+        self.y = HEIGHT / 2
         self.vel = 4
-        self.widht = 100
+        self.width = 100
         self.height = 50
-
-        self.picapau1 = py.image.load('assets/picapau_direita.png')
-        self.picapau2 = py.image.load('assets/picapau_esquerda.png')
-        self.picapau1 = py.transform.scale(self.picapau1,(self.widht,self.height))
-        self.picapau2 = py.transform.scale(self.picapau2,(self.widht,self.height))
+        self.picapau1 = py.image.load('picapau_direita.png').convert_alpha()
+        self.picapau2 = py.image.load('picapau_esquerda.png').convert_alpha()
+        self.picapau1 = py.transform.scale(self.picapau1, (self.width, self.height))
+        self.picapau2 = py.transform.scale(self.picapau2, (self.width, self.height))
         self.image = self.picapau1
-        self.rect = self.image.get_rect()
-        self.mask= py.mask.from_surface(self.image)
+        self.rect = self.image.get_rect(center=(self.x, self.y))
+        self.mask = py.mask.from_surface(self.image)
 
-    def update (self):
+    def reset(self):
+        self.x = 50
+        self.y = HEIGHT / 2
+        self.image = self.picapau1
+        self.rect.center = (self.x, self.y)
+
+    def update(self):
         self.movement()
         self.correction()
-        self.Checaimpacto()
-        self.rect.center = (self.x,self.y)
-    
-    def movement (self):
+        if self.checa_impacto():
+            global jogo
+            #py.mixer.Sound.play(som_perda)
+            jogo = False
+        self.rect.center = (self.x, self.y)
+
+    def movement(self):
         keys = py.key.get_pressed()
-        if keys [py.K_LEFT]:
+        if keys[py.K_LEFT]:
             self.x -= self.vel
             self.image = self.picapau2
-        elif keys [py.K_RIGHT]:
+        elif keys[py.K_RIGHT]:
             self.x += self.vel
             self.image = self.picapau1
-        if keys [py.K_UP]:
+        if keys[py.K_UP]:
             self.y -= self.vel
-        elif keys [py.K_DOWN]:
+        elif keys[py.K_DOWN]:
             self.y += self.vel
-    def correction (self):
-        if self.x - self.widht / 2 < 0 :
-            self.x = self.widht / 2
 
-        elif self.x + self.widht / 2 > WIDTH:
-            self.x = WIDTH - self.widht / 2
-
-        if self.y - self.height / 2 < 0 :
+    def correction(self):
+        if self.x - self.width / 2 < 0:
+            self.x = self.width / 2
+        elif self.x + self.width / 2 > WIDTH:
+            self.x = WIDTH - self.width / 2
+        if self.y - self.height / 2 < 0:
             self.y = self.height / 2
-
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
-    def Checaimpacto(self):
-        colisao_viloes=py.sprite.spritecollide(self, grupo_viloes, False, py.sprite.collide_mask)
+
+    def checa_impacto(self):
+        colisao_viloes = py.sprite.spritecollide(self, grupo_viloes, False, py.sprite.collide_mask)
+        return len(colisao_viloes) > 0
+
+
         
 class viloes(py.sprite.Sprite):
     def __init__ (self,numero):
@@ -97,7 +100,7 @@ class Torta(py.sprite.Sprite):
         super().__init__()
         self.quantidade = quantidade
         self.image = py.image.load('assets/torta.png')
-        self.image = py.transform.scale(self.image,(30,40))
+        self.image = py.transform.scale(self.image,(50,60))
         self.visivel = quantidade != 1
         self.posicao_x = 1200 if quantidade != 1 else 200
         self.posicao_y = HEIGHT / 2
@@ -118,7 +121,7 @@ class Torta(py.sprite.Sprite):
             self.visivel = False
             
             if self.quantidade == 1:
-                torta1.visivel = True
+                Torta.visivel = True
                 if pontos < 5:
                     sobenivel()
                 else:
@@ -126,7 +129,7 @@ class Torta(py.sprite.Sprite):
                     reinicia_jogo()
                     tela_fim(1)
             else:
-                torta2.visivel = True
+                Torta.visivel = True
 
 class Tela(py.sprite.Sprite):
     def __init__(self):
