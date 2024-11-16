@@ -9,8 +9,8 @@ class picapau(py.sprite.Sprite):
         self.vel = 4
         self.width = 100
         self.height = 50
-        self.picapau1 = py.image.load('picapau_direita.png').convert_alpha()
-        self.picapau2 = py.image.load('picapau_esquerda.png').convert_alpha()
+        self.picapau1 = py.image.load('assets/picapau_direita.png').convert_alpha()
+        self.picapau2 = py.image.load('assets/picapau_esquerda.png').convert_alpha()
         self.picapau1 = py.transform.scale(self.picapau1, (self.width, self.height))
         self.picapau2 = py.transform.scale(self.picapau2, (self.width, self.height))
         self.image = self.picapau1
@@ -64,11 +64,11 @@ class viloes(py.sprite.Sprite):
         super().__init__()
         if numero == 1:
             self.x = 380
-            self.image = py.image.load('zecaurubu.png').convert_alpha()
+            self.image = py.image.load('assets/zecaurubu.png').convert_alpha()
             self.vel = -4
         else:
             self.x = 920
-            self.image = py.image.load('leoncio.png').convert_alpha()
+            self.image = py.image.load('assets/leoncio.png').convert_alpha()
             self.vel = 5
         self.y = HEIGHT / 2
         self.width = 100
@@ -108,7 +108,7 @@ class Torta(py.sprite.Sprite):
         super().__init__()
         self.x = 1170
         self.y = HEIGHT / 2
-        self.image = py.image.load('torta.png').convert_alpha()
+        self.image = py.image.load('assets/torta.png').convert_alpha()
         self.image = py.transform.scale(self.image, (50, 60))
         self.rect = self.image.get_rect(center=(self.x, self.y))
         self.mask = py.mask.from_surface(self.image)
