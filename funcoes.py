@@ -28,7 +28,7 @@ class picapau(py.sprite.Sprite):
         self.correction()
         if self.checa_impacto():
             global jogo
-            #py.mixer.Sound.play(som_perda)
+            py.mixer.Sound.play(som_perda)
             jogo = False
         self.rect.center = (self.x, self.y)
 
@@ -96,40 +96,40 @@ class viloes(py.sprite.Sprite):
 
 
 class Torta(py.sprite.Sprite):
-    def __init__(self, quantidade):
+    def __init__(self):
         super().__init__()
-        self.quantidade = quantidade
-        self.image = py.image.load('assets/torta.png')
-        self.image = py.transform.scale(self.image,(50,60))
-        self.visivel = quantidade != 1
-        self.posicao_x = 1200 if quantidade != 1 else 200
-        self.posicao_y = HEIGHT / 2
-        
-        # self.image = py.transform.scale2x(self.image)
-        self.retangulo = self.image.get_rect()
-        self.mascara = py.mask.from_surface(self.image)
-        self.rect = self.mascara.get_rect()
-    
-    def atualizar(self, picapau, pontos):
-        if self.visivel:
-            self.verificar_colisao(grupo_picapau, pontos)
-            self.retangulo.center = (self.posicao_x, self.posicao_y)
+        self.x = 1170
+        self.y = HEIGHT / 2
+        self.image = py.image.load('torta.png').convert_alpha()
+        self.image = py.transform.scale(self.image, (50, 60))
+        self.rect = self.image.get_rect(center=(self.x, self.y))
+        self.mask = py.mask.from_surface(self.image)
+        self.lado = 2
 
-    def verificar_colisao(self, picapau, pontos):
-        colisao_detectada = py.sprite.spritecollide(self, grupo_picapau, False, py.sprite.collide_mask)
-        if colisao_detectada:
-            self.visivel = False
-            
-            if self.quantidade == 1:
-                Torta.visivel = True
-                if pontos < 5:
-                    sobenivel()
-                else:
-                    picapau.empty()
-                    reinicia_jogo()
-                    tela_fim(1)
-            else:
-                Torta.visivel = True
+    def reset(self):
+        self.lado = 2
+        self.x = 1170
+        self.rect.center = (self.x, self.y)
+
+    def update(self):
+        self.pega_torta()
+        self.rect.center = (self.x, self.y)
+
+    def pega_torta(self):
+        global pontos
+        pega_torta = py.sprite.spritecollide(self, grupo_picapau, False, py.sprite.collide_mask)
+        if pega_torta:
+            pontos += 1
+            py.mixer.Sound.play(som_torta)
+            self.mudar_lado()
+
+    def mudar_lado(self):
+        if self.lado == 1:
+            self.lado = 2
+            self.x = 1170
+        else:
+            self.lado = 1
+            self.x = 130
 
 class Tela(py.sprite.Sprite):
     def __init__(self):

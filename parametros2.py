@@ -20,10 +20,10 @@ recorde = 0
 jogo = True
 
 
-#py.mixer.init()
+py.mixer.init()
 #som_jogo = py.mixer.Sound('musica_fundo.mp3')
-#som_torta = py.mixer.Sound('som_torta.mp3')
-#som_perda = py.mixer.Sound('som_perda.mp3')
+som_torta = py.mixer.Sound('som_torta.mp3')
+som_perda = py.mixer.Sound('som_perda.mp3')
 
 #py.mixer.Sound.play(som_jogo, loops=-1)
 
