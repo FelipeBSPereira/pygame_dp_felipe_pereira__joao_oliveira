@@ -95,13 +95,13 @@ class viloes(py.sprite.Sprite):
             self.vel *= -1
 
     def aumenta_velocidade_viloes(self):
-    global pontos
-    if pontos >= 5:
-        nova_velocidade = 5
-        if self.vel > 0:
-            self.vel = nova_velocidade
-        else:
-            self.vel = -nova_velocidade
+        global pontos
+        if pontos >= 5:
+            nova_velocidade = 5
+            if self.vel > 0:
+                self.vel = nova_velocidade
+            else:
+                self.vel = -nova_velocidade
 
 class Torta(py.sprite.Sprite):
     def __init__(self):
