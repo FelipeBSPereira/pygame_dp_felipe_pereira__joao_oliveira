@@ -58,7 +58,7 @@ O Pica-pau deve pegar a famosa torta de manteiga escocesa sem ser atingido pelos
 
 Divirta-se jogando Zombie Run!
 ## Game Play: 
-    - **link:**https://www.youtube.com/watch?v=dwVYTQjMZNs
+    - **link**: https://www.youtube.com/watch?v=dwVYTQjMZNs
 
 ---
 
