@@ -1,5 +1,43 @@
+# O jogo estava funcionando com erros separado, quando juntamos para identificar os erros ele passou a funcionar
+
+
 import pygame as py
-from parametros2 import *
+
+
+WIDTH = 1400
+HEIGHT = 700
+
+
+py.init()
+
+
+window = py.display.set_mode((WIDTH, HEIGHT))
+py.display.set_caption('Crossy Pica-pau')
+clock = py.time.Clock()
+
+
+pontos_font = py.font.SysFont('comicsans', 44, True)
+final_font = py.font.SysFont('comicsans', 64, True)
+
+
+pontos = 0
+nivel = 1
+recorde = 0
+jogo = True
+
+py.mixer.init()
+#som_jogo = py.mixer.Sound('musica_fundo.mp3')
+som_torta = py.mixer.Sound('assets/som_torta.mp3')
+som_perda = py.mixer.Sound('assets/som_perda.mp3')
+
+#py.mixer.Sound.play(som_jogo, loops=-1)
+
+
+screen_group = py.sprite.Group()
+grupo_picapau = py.sprite.Group()
+grupo_viloes = py.sprite.Group()
+grupo_torta = py.sprite.Group()
+
 
 class picapau(py.sprite.Sprite):
     def __init__(self):
@@ -9,6 +47,7 @@ class picapau(py.sprite.Sprite):
         self.vel = 4
         self.width = 100
         self.height = 50
+
         self.picapau1 = py.image.load('assets/picapau_direita.png').convert_alpha()
         self.picapau2 = py.image.load('assets/picapau_esquerda.png').convert_alpha()
         self.picapau1 = py.transform.scale(self.picapau1, (self.width, self.height))
@@ -57,7 +96,8 @@ class picapau(py.sprite.Sprite):
 
     def checa_impacto(self):
         colisao_viloes = py.sprite.spritecollide(self, grupo_viloes, False, py.sprite.collide_mask)
-        return len(colisao_viloes) > 0       
+        return bool(colisao_viloes)
+
 
 class viloes(py.sprite.Sprite):
     def __init__(self, numero):
@@ -70,6 +110,7 @@ class viloes(py.sprite.Sprite):
             self.x = 920
             self.image = py.image.load('assets/leoncio.png').convert_alpha()
             self.vel = 5
+
         self.y = HEIGHT / 2
         self.width = 100
         self.height = 150
@@ -93,7 +134,6 @@ class viloes(py.sprite.Sprite):
         elif self.y + self.height / 2 > HEIGHT:
             self.y = HEIGHT - self.height / 2
             self.vel *= -1
-
     def aumenta_velocidade_viloes(self):
         global pontos
         if pontos >= 5:
@@ -103,19 +143,20 @@ class viloes(py.sprite.Sprite):
             else:
                 self.vel = -nova_velocidade
 
+
 class Torta(py.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.x = 1170
+        self.x = 1170  
         self.y = HEIGHT / 2
         self.image = py.image.load('assets/torta.png').convert_alpha()
         self.image = py.transform.scale(self.image, (50, 60))
         self.rect = self.image.get_rect(center=(self.x, self.y))
         self.mask = py.mask.from_surface(self.image)
-        self.lado = 2
+        self.lado = 2  
 
     def reset(self):
-        self.lado = 2
+        self.lado = 2  
         self.x = 1170
         self.rect.center = (self.x, self.y)
 
@@ -139,6 +180,7 @@ class Torta(py.sprite.Sprite):
             self.lado = 1
             self.x = 130
 
+
 class Tela(py.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -159,7 +201,7 @@ def reinicia_jogo():
 
 
 def tela_inicial():
-    window.fill((0, 0, 0))
+    window.fill((0, 0, 0))  
     titulo = final_font.render("Bem-vindo ao Crossy Pica-pau!", True, (255, 255, 0))
     iniciar_texto = pontos_font.render("Pressione qualquer tecla para começar", True, (255, 255, 255))
     window.blit(titulo, (WIDTH // 2 - titulo.get_width() // 2, HEIGHT // 3))
@@ -177,7 +219,7 @@ def tela_inicial():
 
 
 def tela_final():
-    window.fill((0, 0, 0))
+    window.fill((0, 0, 0))  
     final_texto = final_font.render("Game Over!", True, (255, 0, 0))
     reinicia_texto = pontos_font.render("Pressione qualquer tecla para reiniciar", True, (255, 255, 255))
     window.blit(final_texto, (WIDTH // 2 - final_texto.get_width() // 2, HEIGHT // 3))
@@ -192,3 +234,52 @@ def tela_final():
                 exit()
             if event.type == py.KEYDOWN:
                 esperando = False
+
+
+
+fundo = Tela()
+screen_group.add(fundo)
+
+picapau1 = picapau()
+grupo_picapau.add(picapau1)
+
+vilao1 = viloes(1)
+vilao2 = viloes(2)
+grupo_viloes.add(vilao1, vilao2)
+
+torta1 = Torta()
+grupo_torta.add(torta1)
+
+
+tela_inicial()
+
+
+running = True
+while running:
+    clock.tick(60)
+
+    for event in py.event.get():
+        if event.type == py.QUIT:
+            running = False
+
+    if jogo:
+        window.fill((0, 0, 0))  
+        screen_group.draw(window)
+        grupo_viloes.draw(window)
+        grupo_picapau.draw(window)
+        grupo_torta.draw(window)
+        grupo_viloes.update()
+        grupo_picapau.update()
+        grupo_torta.update()
+        screen_group.update()
+
+
+        pontos_texto = pontos_font.render(f"Pontuação: {pontos}", True, (255, 255, 255))
+        window.blit(pontos_texto, (10, 10))
+    else:
+        tela_final()
+        reinicia_jogo()
+
+    py.display.update()
+
+py.quit()
