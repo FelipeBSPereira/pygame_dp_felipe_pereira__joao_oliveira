@@ -201,15 +201,18 @@ def reinicia_jogo():
 
 
 def tela_inicial():
-    window.fill((0, 0, 0))  
-    titulo = final_font.render("Bem-vindo ao Crossy Pica-pau!", True, (255, 255, 0))
-    iniciar_texto = pontos_font.render("Pressione qualquer tecla para começar", True, (255, 255, 255))
-    window.blit(titulo, (WIDTH // 2 - titulo.get_width() // 2, HEIGHT // 3))
-    window.blit(iniciar_texto, (WIDTH // 2 - iniciar_texto.get_width() // 2, HEIGHT // 2))
-    py.display.update()
+    fundo = py.image.load("assets/tela_inicial.png")  
+    fundo = py.transform.scale(fundo, (WIDTH, HEIGHT))   
 
     esperando = True
     while esperando:
+        window.blit(fundo, (0, 0))
+        titulo = final_font.render("Bem-vindo ao Crossy Pica-pau!", True, (255, 255, 0))
+        iniciar_texto = pontos_font.render("Pressione qualquer tecla para começar", True, (255, 255, 255))
+        window.blit(titulo, (WIDTH // 2 - titulo.get_width() // 2, HEIGHT // 3))
+        window.blit(iniciar_texto, (WIDTH // 2 - iniciar_texto.get_width() // 2, HEIGHT // 2))
+        py.display.update()
+        
         for event in py.event.get():
             if event.type == py.QUIT:
                 py.quit()
@@ -219,15 +222,18 @@ def tela_inicial():
 
 
 def tela_final():
-    window.fill((0, 0, 0))  
-    final_texto = final_font.render("Game Over!", True, (255, 0, 0))
-    reinicia_texto = pontos_font.render("Pressione qualquer tecla para reiniciar", True, (255, 255, 255))
-    window.blit(final_texto, (WIDTH // 2 - final_texto.get_width() // 2, HEIGHT // 3))
-    window.blit(reinicia_texto, (WIDTH // 2 - reinicia_texto.get_width() // 2, HEIGHT // 2))
-    py.display.update()
+    fundo = py.image.load("assets/tela_final.png")
+    fundo = py.transform.scale(fundo, (WIDTH, HEIGHT)) 
 
     esperando = True
     while esperando:
+        window.blit(fundo, (0, 0))
+        final_texto = final_font.render("Game Over!", True, (255, 0, 0))
+        reinicia_texto = pontos_font.render("Pressione qualquer tecla para reiniciar", True, (255, 255, 255))
+        window.blit(final_texto, (WIDTH // 2 - final_texto.get_width() // 2, HEIGHT // 3))
+        window.blit(reinicia_texto, (WIDTH // 2 - reinicia_texto.get_width() // 2, HEIGHT // 2))
+        py.display.update()
+        
         for event in py.event.get():
             if event.type == py.QUIT:
                 py.quit()
