@@ -136,8 +136,26 @@ class viloes(py.sprite.Sprite):
             self.vel *= -1
     def aumenta_velocidade_viloes(self):
         global pontos
-        if pontos >= 5:
-            nova_velocidade = 5
+        if pontos >= 5 and pontos < 10:
+            nova_velocidade = 8
+            if self.vel > 0:
+                self.vel = nova_velocidade
+            else:
+                self.vel = -nova_velocidade
+        elif pontos >= 10 and pontos < 15:
+            nova_velocidade = 12
+            if self.vel > 0:
+                self.vel = nova_velocidade
+            else:
+                self.vel = -nova_velocidade
+        elif pontos >= 15 and pontos < 20:
+            nova_velocidade = 16
+            if self.vel > 0:
+                self.vel = nova_velocidade
+            else:
+                self.vel = -nova_velocidade
+        else: 
+            nova_velocidade = 20
             if self.vel > 0:
                 self.vel = nova_velocidade
             else:
@@ -233,7 +251,7 @@ def tela_final():
         window.blit(final_texto, (WIDTH // 2 - final_texto.get_width() // 2, HEIGHT // 3))
         window.blit(reinicia_texto, (WIDTH // 2 - reinicia_texto.get_width() // 2, HEIGHT // 2))
         py.display.update()
-        
+
         for event in py.event.get():
             if event.type == py.QUIT:
                 py.quit()
