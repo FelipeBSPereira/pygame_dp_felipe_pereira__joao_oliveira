@@ -9,7 +9,9 @@ O Pica-pau deve pegar a famosa torta de manteiga escocesa sem ser atingido pelos
 ## Créditos
 
 - **Desenvolvedores**:FelipeBSPereira (Felipe Pereira), oli-ver-28 (João Oliveira)
-- **imagens**: 
+- **imagens**:
+    - Chat-GPT
+      
     - Joao Oliveira
     
     - https://www.coloringcity.net/wp-content/uploads/2018/07/adesivo_parede_infantil_decorativo_pica_pau_quarto_crianca_d_nq_np_162121_mlb20718520607_052016_f_966x1024_7.jpg
