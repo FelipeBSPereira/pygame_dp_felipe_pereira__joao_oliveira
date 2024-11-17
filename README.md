@@ -16,7 +16,7 @@ O Pica-pau deve pegar a famosa torta de manteiga escocesa sem ser atingido pelos
     
     - https://www.google.com/url?sa=i&url=https%3A%2F%2Fpicapaubr.fandom.com%2Fpt-br%2Fwiki%2FZeca_Urubu&psig=AOvVaw0AoYyvUv_dghwHRQgA8XA4&ust=1731418104073000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNDbs56x1IkDFQAAAAAdAAAAABAE
 
-    -https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ideiadereceitas.com.br%2Ftorta-de-manteiga-escocesa-do-pica-pau%2F&psig=AOvVaw2l4rchdm_1X9BlGJ4jUvDc&ust=1731588746390000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMicwfus2YkDFQAAAAAdAAAAABAE
+    - https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ideiadereceitas.com.br%2Ftorta-de-manteiga-escocesa-do-pica-pau%2F&psig=AOvVaw2l4rchdm_1X9BlGJ4jUvDc&ust=1731588746390000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMicwfus2YkDFQAAAAAdAAAAABAE
 
     - https://ih1.redbubble.net/image.4433987088.6936/raf,750x1000,075,t,FFFFFF:97ab1c12de.jpg
 
@@ -49,7 +49,7 @@ O Pica-pau deve pegar a famosa torta de manteiga escocesa sem ser atingido pelos
     - **Seta para a direita**: Mover para a direita
     - **Seta para cima**: Mover para cima
     - **Seta para baixo**: Mover para baixo
-    -**Qualquer tecla**: Iniciar/ Reiniciar
+    - **Qualquer tecla**: Iniciar/ Reiniciar
 
 3. Objetivo:
     - Pegar o maximo de tortas.
